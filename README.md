@@ -51,11 +51,12 @@ Expected Output File: path.txt
 -
 Text file containing:
 
-  The sequence of waypoint IDs (1-based indexing),
+ ->The sequence of waypoint IDS (1-based indexing),
 
-  Followed by the total travel cost (distance).
+ ->Followed by the total travel cost (distance).
 
-Example path.txt after execution:
+**Example path.txt after execution:
 
-1 2 3 1 20.78
-Meaning: Start at waypoint 1 → waypoint 2 → waypoint 3 → return to waypoint 1, total travel distance = 20.78 units.
+1 2 3 1 20.78**
+
+*Meaning: Start at waypoint 1 → waypoint 2 → waypoint 3 → return to waypoint 1, total travel distance = 20.78 units.*
