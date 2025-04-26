@@ -58,3 +58,8 @@ Text file containing:
 **1 2 3 1 20.78**
 
 *Meaning: Start at waypoint 1 → waypoint 2 → waypoint 3 → return to waypoint 1, total travel distance = 20.78 units.*
+
+**Output & testcase data Snippets:**
+![Screenshot 2025-04-26 102849](https://github.com/user-attachments/assets/3272c1e2-2c18-49ee-a8da-8764af209c3e)  ![Screenshot 2025-04-26 102830](https://github.com/user-attachments/assets/b6db616b-0180-4166-8291-bc4bf8127a54)
+
+
