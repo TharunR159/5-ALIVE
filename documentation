@@ -164,6 +164,7 @@ Optimal Path Computed: 1 → 6 → 8 → 7 → 10 → 4 → 5 → 2 → 9 → 3 
 Total Fuel Cost: 1886.77 units
 This confirms that the TSP solver has successfully computed a valid route visiting each waypoint exactly once before returning to the starting point.
 
+
 Performance Evaluation
 1.Path Validity Check:The path includes all waypoints without duplicates.  The path returns to the starting waypoint (1), which meets problem constraints.
 2.Fuel Cost Accuracy
