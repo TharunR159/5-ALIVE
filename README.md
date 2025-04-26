@@ -2,15 +2,15 @@
 
 Team Information
 -
-Team Name: 5-ALIVE
+**Team Name:** 5-ALIVE
 
-Team ID: 16
+**Team ID:** 16
 
 Problem Statement
 -
-Problem Number: 3
+**Problem Number:** 3
 
-Problem Title: Space Mission Fuel Optimiser
+**Problem Title:** Space Mission Fuel Optimiser
 
 Instructions to Run the Code
 -
@@ -49,8 +49,12 @@ Expected Output File: path.txt
 -
 Text file containing:
 
-The sequence of waypoint IDs (1-based indexing),
+1) The sequence of **waypoint IDs** (1-based indexing),
 
-Followed by the total travel cost (distance).
+2) Followed by the **total travel cost** (distance).
 
-Example path.txt after execution:
+**Example path.txt after execution:**
+
+**1 2 3 1 20.78**
+
+*Meaning: Start at waypoint 1 → waypoint 2 → waypoint 3 → return to waypoint 1, total travel distance = 20.78 units.*
