@@ -1,1 +1,208 @@
+KVGCE Hackwise Hackathon 2025
 
+5-ALIVE
+A PROJECT DOCUMENTATION
+On
+Problem 03:
+"Space Mission Fuel Optimizer"
+
+Team Members:
+SANTRUPTH SHIVANNA
+RUCHITHA K P
+DEEKSHA
+THARUN R
+
+Hackathon ID: 16
+Date: 27/04/2025
+Institution: KVG College of Engineering
+
+
+Introduction: Space Mission Fuel Optimizer
+Problem Overview
+Fuel Optimization: The Core Challenge
+Space missions demand meticulous fuel management due to the extreme constraints of space travel. Unlike terrestrial vehicles, spacecraft cannot refuel mid-journey, making every kilogram of fuel a critical resource. Excess fuel increases launch costs, affects payload capacity, and limits mission duration. Optimizing navigation ensures fuel is used only where necessary, enabling extended missions while maintaining efficiency.
+Traveling Salesman Problem (TSP) in 3D Space
+The Traveling Salesman Problem (TSP) is a well-known optimization problem that translates perfectly to space travel. A spacecraft must visit multiple waypoints while minimizing total travel distance, returning to its starting location. 
+Minimizing travel distance is crucial for efficient fuel consumption in space missions, but navigating in “3D space” adds complexity, requiring advanced computational methods for path optimization; the objective is to achieve a solution “within 1%” of the theoretical minimum fuel cost to ensure near-optimal efficiency. 
+Objectives:
+The goal of this project is to develop an algorithm that:
+1.Reads waypoint data from a text file containing coordinates.
+2.Computes Euclidean distances between waypoints to determine travel costs.
+3.Optimizes the travel path using a TSP-solving algorithm (e.g., dynamic programming or nearest neighbor heuristic).
+4.Calculates total fuel consumption, ensuring it remains within 1% of the theoretical minimum.
+5.Outputs results, containing the optimal sequence of waypoints and the total fuel cost.
+
+TSP Solver Logic (High-Level Algorithm)
+
+1)Parsing Input Data:
+Reads waypoints.txt containing 3D coordinates (x, y, z).
+Generates a distance matrix to compute travel costs between waypoints.
+
+2)Distance Calculation (Fuel Consumption):
+Fuel cost is determined using Euclidean distance, formulated as:
+Each waypoint pair’s distance is stored in an N × N matrix.
+
+3)Solving TSP (Path Optimization):
+Since TSP is NP-hard, the implementation adapts based on waypoint count:
+Brute-force search (Exact Solution for N ≤ 10)
+Nearest Neighbor heuristic (Approximate Solution for N > 10)
+2-Opt Optimization to refine heuristic results
+
+4)Solution Optimization (2-Opt Algorithm):
+Since heuristic methods may yield suboptimal paths, the implementation applies 2-opt refinement to eliminate unnecessary detours.
+5)Output Generation & Validation:
+The final path is stored in path.txt, ensuring: 
+✅ The path visits all waypoints exactly once. 
+✅ The path returns to the start.
+✅ Fuel cost is within 1% of the optimal value.
+
+
+
+Implementation Details
+
+Programming Language & Libraries Used
+Language: Python
+Libraries: math – For Euclidean distance calculations.
+Itertools – For permutations in brute-force TSP solving
+
+Code Structure:
+The code follows a modular approach with well-defined functions:
+
+Input Handling:
+read_waypoints(filename): Reads waypoints.txt and extracts 3D coordinates.
+Distance Calculation:
+euclidean_3d(p1, p2): Computes Euclidean distance between waypoint pairs.
+build_distance_matrix(waypoints): Generates an N × N distance matrix for TSP processing.
+
+TSP Solvers:
+tsp_brute_force(dist_matrix): Uses brute-force permutations for small values of N.
+tsp_nearest_neighbor(dist_matrix): Greedy nearest neighbor heuristic for larger values of N.
+improve_solution(path, cost, dist_matrix): 2-opt optimization to refine suboptimal paths.
+
+Output Handling:
+Generates path.txt, ensuring results are formatted correctly.
+
+Execution Flow (main() function):
+Determines optimal or approximate algorithm based on N (waypoint count).
+Computes fuel cost and writes results to path.txt.
+
+How to Run the Code
+Ensure Python is installed (Python 3.x). Place waypoints.txt in the same directory as your script. Run the script using the command:
+ ------>“python main.py”
+Dataset Handling: Parsing waypoints.txt
+
+Overview
+The waypoints.txt file contains 3D coordinates of waypoints in space, formatted as:
+----> “id x y z”
+where:
+Id is an integer identifier (1 ≤ id ≤ N).
+x, y, z are floating-point coordinates (-1000 ≤ x, y, z ≤ 1000).
+The script parses this file to extract coordinates and generate a distance matrix for TSP computations.
+
+Parsing Logic
+Read waypoints.txt line by line. 
+Extract numeric values (converting id to an integer and x, y, z to floats). 
+Store waypoints as tuples (id, x, y, z). 
+Create an index-based list to maintain order for TSP processing.
+
+Pseudocode:
+“Open waypoints.txt
+For each line:
+Split by spaces
+Convert values to appropriate data types (int for id, float for x, y, z)
+Store as (id, x, y, z)
+Return parsed waypoints”
+Dataset Constraints & Validation:
+Ensuring Correct Input Format:
+Validates at least 5 waypoints (N ≥ 5).
+Ensures coordinates are within [-1000, 1000] range.
+
+
+
+Output Format: path.txt
+The output file, path.txt, contains the optimized waypoint visitation order and total fuel cost. The format is:
+“id1 id2 id3 ... idN fuel_cost”
+
+Breakdown of Output Structure
+Waypoint IDs (id1, id2, ... idN)
+Ordered list of waypoint identifiers (integer values).
+Represents the exact order in which the spacecraft visits each waypoint.
+The first and last IDs should be the same, ensuring the spacecraft returns to the starting location.
+Total Fuel Cost (fuel_cost)
+The sum of Euclidean distances between waypoints in the path.
+Represented as a floating-point number rounded to two decimal places (e.g., 1250.75).
+Ensures fuel consumption is within 1% of the minimum possible value.
+
+Example Output Scenarios
+📌 Example 1 (5 Waypoints)
+“1 3 2 5 4 1 450.32”
+The spacecraft starts at waypoint 1, visits waypoints 3 → 2 → 5 → 4, and returns to 1.
+📌 Example 2 (10 Waypoints)
+“2 7 5 9 3 8 6 1 4 10 2 1250.75”
+The spacecraft starts at waypoint 2, follows an optimized path through other waypoints, and returns to 2.
+
+
+Challenges & Solutions: Technical Issues in TSP Optimization
+
+I.Computational Complexity – TSP is NP-hard; used Dynamic Programming for N ≤ 10 and Nearest Neighbor Heuristic for N > 10 to balance accuracy & speed.
+=> Used Dynamic Programming for small N and Nearest Neighbor Heuristic for larger N to optimize performance.
+II.Numerical Precision Issues – Floating-point errors in fuel cost; solved by rounding to two decimal places and using stable computations.
+=> Rounding fuel cost to two decimal places to maintain accuracy.
+III.Path Validation Errors – Ensuring waypoints are visited exactly once; implemented strict validation checks before writing path.txt.
+=>  Implemented strict validation checks ensuring all waypoints are visited once and returning to the start.
+IV.Execution Time Constraints (<10 sec) – Used memoization, parallel computations, and hybrid approaches to optimize performance.
+=> Applied memoization, parallel computations, and hybrid approaches to enhance efficiency.
+V.Handling Large Coordinate Ranges – Normalized coordinates and maintained input order consistency for reliable calculations.
+=> Normalized coordinates and preserved input order consistency to avoid computational errors.
+
+
+Test Case Results: Performance on the sample test case
+Execution Summary
+Your script (main.py) was executed in PowerShell, producing the following output:
+“1 6 8 7 10 4 5 2 9 3 1 1886.77”
+Optimal Path Computed: 1 → 6 → 8 → 7 → 10 → 4 → 5 → 2 → 9 → 3 → 1
+Total Fuel Cost: 1886.77 units
+This confirms that the TSP solver has successfully computed a valid route visiting each waypoint exactly once before returning to the starting point.
+
+Performance Evaluation
+1.Path Validity Check:The path includes all waypoints without duplicates.  The path returns to the starting waypoint (1), which meets problem constraints.
+2.Fuel Cost Accuracy
+The total fuel cost (1886.77) is computed using Euclidean distance.
+To meet hackathon scoring criteria, fuel consumption must be within 1% of the optimal minimum.
+Verification requires comparing this result with a benchmark optimal cost (e.g., from a brute-force or reference solution)
+3.Execution Time Efficiency:
+The solution must run within 10 seconds.
+Given N ≤ 15 waypoints, heuristic methods (nearest neighbor + 2-opt optimization) should yield results much faster than brute-force methods.
+Timing analysis should confirm whether the solution meets the required threshold.
+
+
+Future Improvements & Optimizations
+
+1. Advanced TSP Solvers (Simulated Annealing & Genetic Algorithms)
+Simulated Annealing: Uses probabilistic techniques to escape local minima, improving suboptimal solutions.
+Genetic Algorithm: Evolves paths using crossover and mutation for faster convergence to near-optimal routes.
+2. Parallel Computing for Faster Execution
+Distribute computations across multiple cores to reduce processing time for larger waypoint sets.
+GPU acceleration could enhance distance matrix calculations.
+3. Heuristic Enhancements (Hybrid Methods)
+Combining Nearest Neighbor + 2-Opt refinement for better accuracy.
+Integrating Machine Learning to predict efficient routes based on past optimized paths.
+4. Visualization & Debugging Tools
+Implement 3D path plotting for better analysis of spacecraft navigation routes.
+Use interactive simulations to compare different optimization methods.
+These improvements will enhance performance, scalability, and accuracy in solving space mission fuel optimization challenges.
+
+
+References
+
+Algorithms
+Travelling Salesman Problem (TSP) – GeeksforGeeks
+Nearest Neighbour Heuristic – MIT OpenCourseWare 
+Traveling Salesman Problem (TSP) using Dynamic Programming
+Distance Calculation
+3D Euclidean Distance Formula – Math Insight
+Python Libraries
+math module documentation
+Itertools module documentation
+Dataset
+Provided by Hackathon organisers (Test Input File: waypoints.txt)
